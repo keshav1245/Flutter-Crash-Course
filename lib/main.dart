@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_catelog/home_page.dart';
+import 'package:flutter_catelog/screens/home_screen.dart';
+import 'package:flutter_catelog/screens/login_screen.dart';
 
 //Entry point is Main function
 
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    //WHat is context : Which thing is located where (like HomePage, MaterialApp)
 
     //Different Data Types
     // int days = 30;
@@ -24,9 +26,31 @@ class MyApp extends StatelessWidget{
     // var price = 1003;
     // const e = 2.713; // constant
 
+    //Calling a method
+    // bringVegetables(isCarryBag : true , rupees: 100);
+
     return MaterialApp(
-      home: HomePage()
+      // home: HomePage(), // commented because given in routes
+      themeMode: ThemeMode.light,
+      theme: ThemeData(
+        // primaryColor: Colors.red
+        primarySwatch: Colors.deepOrange
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark
+          // primarySwatch: Colors.deepOrange
+      ),
+      initialRoute: "/home",
+      routes: {
+        "/" : (context) => HomePage(),
+        "/home" : (context) => HomePage(),
+        "/login" : (context) => LoginPage()
+      } // initial route, onUnknownRoute, onGenerateRoute, onGenerateInitialRoute
     );
   }
+
+  // bringVegetables({required bool isCarryBag, int rupees = 100}) { // Curly braces around param to give a default value.
+  //
+  // }
 
 }

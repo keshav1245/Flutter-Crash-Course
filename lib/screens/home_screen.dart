@@ -5,7 +5,7 @@ class HomePage extends StatelessWidget{
   Widget build(BuildContext context) {
 
     final int days = 30;
-    final String name = "Keshav";
+    final String name = "Zukayu";
 
     return Scaffold( // Scaffhold is analogous to HTML head body and footer.
         appBar: AppBar(
