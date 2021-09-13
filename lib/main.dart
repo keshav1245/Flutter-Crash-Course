@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_catelog/screens/home_screen.dart';
 import 'package:flutter_catelog/screens/login_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 //Entry point is Main function
 
@@ -34,13 +35,15 @@ class MyApp extends StatelessWidget{
       themeMode: ThemeMode.light,
       theme: ThemeData(
         // primaryColor: Colors.red
-        primarySwatch: Colors.deepOrange
+        primarySwatch: Colors.deepOrange,
+        fontFamily: GoogleFonts.lato().fontFamily,
+        primaryTextTheme: GoogleFonts.latoTextTheme()
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark
           // primarySwatch: Colors.deepOrange
       ),
-      initialRoute: "/home",
+      initialRoute: "/login",
       routes: {
         "/" : (context) => HomePage(),
         "/home" : (context) => HomePage(),
