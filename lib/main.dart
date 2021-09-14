@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget{
       themeMode: ThemeMode.light,
       theme: ThemeData(
         // primaryColor: Colors.red
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.deepPurple,
         fontFamily: GoogleFonts.lato().fontFamily,
         primaryTextTheme: GoogleFonts.latoTextTheme()
       ),
@@ -44,7 +44,8 @@ class MyApp extends StatelessWidget{
         brightness: Brightness.dark
           // primarySwatch: Colors.deepOrange
       ),
-      initialRoute: "/login",
+      debugShowCheckedModeBanner: false,
+      initialRoute: "/",
       routes: {
         "/" : (context) => HomePage(),
         MyRoutes.homeRoute : (context) => HomePage(),
