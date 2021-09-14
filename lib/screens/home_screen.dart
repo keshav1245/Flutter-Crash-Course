@@ -2,14 +2,39 @@ import "package:flutter/material.dart";
 import 'package:flutter_catelog/models/catelog.dart';
 import 'package:flutter_catelog/widgets/drawer.dart';
 import 'package:flutter_catelog/widgets/item_widget.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 
-class HomePage extends StatelessWidget{
+class HomePage extends StatefulWidget{
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  final int days = 30;
+  final String name = "Zukayu";
+
+
+  @override
+  initState(){
+    super.initState(); // Called before build function. Agar yahan hi data mil jaye to we can pass it in the build function.
+    loadData();
+  }
+
+  loadData() async{
+    final catalogJson = await rootBundle.loadString("assets/files/catalog.json");
+    final decoded = jsonDecode(catalogJson);
+    var products = decoded['products'];
+    print(products);
+  }
+
   @override
   Widget build(BuildContext context) {
 
-    final int days = 30;
-    final String name = "Zukayu";
     final dummyList = List.generate(20, (index) => CatalogModel.items[0]);
+
+
 
     return Scaffold( // Scaffhold is analogous to HTML head body and footer.
         appBar: AppBar(
@@ -47,25 +72,4 @@ class HomePage extends StatelessWidget{
         drawer: MyDrawer()
     );
   }
-
-
-//  Notes
-//Diff between Flutter and react native ?
-//React native uses Native components of both Android and iOS
-//Flutter is like naming engine that draws on a canvas.
-
-//3 Trees in Flutter
-// 1. Widget Tree,
-// 2. Element Tree,
-// 3. Render Tree
-//Order : 1 -> 2 -> 3
-
-//Drawing/Painting on canvas is done by Render Tree
-//Widgets are immutable
-//We write a widget which further sends requirements to element tree and painted by Render Tree
-
-//Change in widget properties allow render tree to redraw the complete widget again ( because of immutability)
-//But Element Tree nows that it is the same element ()
-
-
 }
