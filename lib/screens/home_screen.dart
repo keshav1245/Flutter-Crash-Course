@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
+import 'package:flutter_catelog/models/catelog.dart';
 import 'package:flutter_catelog/widgets/drawer.dart';
+import 'package:flutter_catelog/widgets/item_widget.dart';
 
 class HomePage extends StatelessWidget{
   @override
@@ -7,6 +9,7 @@ class HomePage extends StatelessWidget{
 
     final int days = 30;
     final String name = "Zukayu";
+    final dummyList = List.generate(20, (index) => CatalogModel.items[0]);
 
     return Scaffold( // Scaffhold is analogous to HTML head body and footer.
         appBar: AppBar(
@@ -28,10 +31,18 @@ class HomePage extends StatelessWidget{
         //   ),
         // ),
 
-        Center(
-            child: Container(
-                child: Text("Welcome $name to $days days of Flutter") // $ => String Interpolation, to manipulate our string vals
-            )
+        // Center(
+        //     child: Container(
+        //         child: Text("Welcome $name to $days days of Flutter") // $ => String Interpolation, to manipulate our string vals
+        //     )
+        // ),
+        ListView.builder( // .buider gives us Recycler View
+          itemCount: dummyList.length,
+          itemBuilder: (context, index) {
+            return ItemWidget(
+                item: dummyList[index]
+            );
+          },
         ),
         drawer: MyDrawer()
     );
