@@ -21,9 +21,9 @@ class ItemWidget extends StatelessWidget{
             onTap: (){
               print(item.name);
             },
-            leading: Image.network(item.imUrl),
+            leading: Image.network(item.image),
             title: Text(item.name),
-            subtitle: Text(item.description),
+            subtitle: Text(item.desc),
             trailing: Text("\$"+item.price.toString(), style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),textScaleFactor: 1.5,),
           ),
         ),

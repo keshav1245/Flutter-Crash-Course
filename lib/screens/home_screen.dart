@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_catelog/models/catelog.dart';
 import 'package:flutter_catelog/widgets/drawer.dart';
@@ -23,16 +24,20 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async{
+    await Future.delayed(Duration(seconds: 2));
     final catalogJson = await rootBundle.loadString("assets/files/catalog.json");
     final decoded = jsonDecode(catalogJson);
     var products = decoded['products'];
-    print(products);
+    CatalogModel.items = List.from(products).map<Item>((item) => Item.fromMap(item)).toList();
+    setState(() {
+
+    });
   }
 
   @override
   Widget build(BuildContext context) {
 
-    final dummyList = List.generate(20, (index) => CatalogModel.items[0]);
+    // final dummyList = List.generate(20, (index) => CatalogModel.items[0]);
 
 
 
@@ -61,13 +66,49 @@ class _HomePageState extends State<HomePage> {
         //         child: Text("Welcome $name to $days days of Flutter") // $ => String Interpolation, to manipulate our string vals
         //     )
         // ),
-        ListView.builder( // .buider gives us Recycler View
-          itemCount: dummyList.length,
-          itemBuilder: (context, index) {
-            return ItemWidget(
-                item: dummyList[index]
-            );
-          },
+        (CatalogModel.items != null && CatalogModel.items.isNotEmpty) ?
+        // ListView.builder( // .buider gives us Recycler View
+        //   itemCount: CatalogModel.items.length,
+        //   itemBuilder: (context, index) {
+        //     return ItemWidget(
+        //         item: CatalogModel.items[index]
+        //     );
+        //   },
+        // )
+        GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16
+            ), //to tell how many items in a grid,  it uses SliverGridDelegate
+            itemBuilder: (context, index){
+              final item = CatalogModel.items[index];
+              return Card(
+                clipBehavior: Clip.antiAlias,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  child: GridTile(
+                    header: Container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.deepPurple
+                        ),
+                        child: Text(item.name, style: TextStyle(color: Colors.white),)
+                    ),
+                    child: Image.network(item.image),
+                    footer: Container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                            color: Colors.deepPurple
+                        ),
+                        child: Text(item.price.toString(), style: TextStyle(color: Colors.white),)
+                    ),
+                  )
+              );
+            },
+            itemCount: CatalogModel.items.length
+        )
+            : Center(
+          child: CircularProgressIndicator(),
         ),
         drawer: MyDrawer()
     );
