@@ -2,9 +2,14 @@ import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_catelog/models/catelog.dart';
 import 'package:flutter_catelog/widgets/drawer.dart';
+import 'package:flutter_catelog/widgets/home_widgets/catalog_header.dart';
+import 'package:flutter_catelog/widgets/home_widgets/catalog_list.dart';
 import 'package:flutter_catelog/widgets/item_widget.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_catelog/widgets/themes.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'dart:convert';
+
 
 class HomePage extends StatefulWidget{
   @override
@@ -41,76 +46,105 @@ class _HomePageState extends State<HomePage> {
 
 
 
-    return Scaffold( // Scaffhold is analogous to HTML head body and footer.
-        appBar: AppBar(
-            title: Text("Catelog App"), // Title takes in a text widget
-        ),
-        body :
-        // Container( // Constrains goes down, Sizes goes up and Parent sets the Position
-        //   constraints: BoxConstraints(
-        //     minHeight: 70,
-        //     maxHeight: 200,
-        //     minWidth: 70,
-        //     maxWidth: 200
-        //   ),
-        //   color: Colors.green,
-        //   child: Container(
-        //     height: 100,
-        //     width: 100,
-        //     color: Colors.red
-        //   ),
-        // ),
+    // return Scaffold( // Scaffhold is analogous to HTML head body and footer.
+    //     appBar: AppBar(
+    //         title: Text("Catelog App"), // Title takes in a text widget
+    //     ),
+    //     body :
+    //     // Container( // Constrains goes down, Sizes goes up and Parent sets the Position
+    //     //   constraints: BoxConstraints(
+    //     //     minHeight: 70,
+    //     //     maxHeight: 200,
+    //     //     minWidth: 70,
+    //     //     maxWidth: 200
+    //     //   ),
+    //     //   color: Colors.green,
+    //     //   child: Container(
+    //     //     height: 100,
+    //     //     width: 100,
+    //     //     color: Colors.red
+    //     //   ),
+    //     // ),
+    //
+    //     // Center(
+    //     //     child: Container(
+    //     //         child: Text("Welcome $name to $days days of Flutter") // $ => String Interpolation, to manipulate our string vals
+    //     //     )
+    //     // ),
+    //     (CatalogModel.items != null && CatalogModel.items.isNotEmpty) ?
+    //     // ListView.builder( // .buider gives us Recycler View
+    //     //   itemCount: CatalogModel.items.length,
+    //     //   itemBuilder: (context, index) {
+    //     //     return ItemWidget(
+    //     //         item: CatalogModel.items[index]
+    //     //     );
+    //     //   },
+    //     // )
+    //     GridView.builder(
+    //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    //           crossAxisCount: 2,
+    //           crossAxisSpacing: 16,
+    //           mainAxisSpacing: 16
+    //         ), //to tell how many items in a grid,  it uses SliverGridDelegate
+    //         itemBuilder: (context, index){
+    //           final item = CatalogModel.items[index];
+    //           return Card(
+    //             clipBehavior: Clip.antiAlias,
+    //               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+    //               child: GridTile(
+    //                 header: Container(
+    //                     padding: EdgeInsets.all(12),
+    //                     decoration: BoxDecoration(
+    //                       color: Colors.deepPurple
+    //                     ),
+    //                     child: Text(item.name, style: TextStyle(color: Colors.white),)
+    //                 ),
+    //                 child: Image.network(item.image),
+    //                 footer: Container(
+    //                     padding: EdgeInsets.all(12),
+    //                     decoration: BoxDecoration(
+    //                         color: Colors.deepPurple
+    //                     ),
+    //                     child: Text(item.price.toString(), style: TextStyle(color: Colors.white),)
+    //                 ),
+    //               )
+    //           );
+    //         },
+    //         itemCount: CatalogModel.items.length
+    //     )
+    //         : Center(
+    //       child: CircularProgressIndicator(),
+    //     ),
+    //     drawer: MyDrawer()
+    // );
 
-        // Center(
-        //     child: Container(
-        //         child: Text("Welcome $name to $days days of Flutter") // $ => String Interpolation, to manipulate our string vals
-        //     )
-        // ),
-        (CatalogModel.items != null && CatalogModel.items.isNotEmpty) ?
-        // ListView.builder( // .buider gives us Recycler View
-        //   itemCount: CatalogModel.items.length,
-        //   itemBuilder: (context, index) {
-        //     return ItemWidget(
-        //         item: CatalogModel.items[index]
-        //     );
-        //   },
-        // )
-        GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16
-            ), //to tell how many items in a grid,  it uses SliverGridDelegate
-            itemBuilder: (context, index){
-              final item = CatalogModel.items[index];
-              return Card(
-                clipBehavior: Clip.antiAlias,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  child: GridTile(
-                    header: Container(
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.deepPurple
-                        ),
-                        child: Text(item.name, style: TextStyle(color: Colors.white),)
-                    ),
-                    child: Image.network(item.image),
-                    footer: Container(
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                            color: Colors.deepPurple
-                        ),
-                        child: Text(item.price.toString(), style: TextStyle(color: Colors.white),)
-                    ),
-                  )
-              );
-            },
-            itemCount: CatalogModel.items.length
-        )
-            : Center(
-          child: CircularProgressIndicator(),
+  //  The Above code was till day 14.
+  //  Now we will use velocity x for UI UX designing.
+
+    return Scaffold(
+      // appBar: AppBar(),
+      backgroundColor: MyTheme.cream,
+      body: SafeArea(
+        child: Container(
+          padding: Vx.m32,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CatalogHeader(),
+              if(CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+                CatalogList().py16().expand()
+              else
+                Center(
+                  child: CircularProgressIndicator(),
+                ).expand()
+            ],
+          ),
         ),
-        drawer: MyDrawer()
+      ),
+      drawer: MyDrawer(),
+
     );
+
+
   }
 }
