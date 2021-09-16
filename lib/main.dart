@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_catelog/screens/cart_page.dart';
 import 'package:flutter_catelog/screens/home_details_page.dart';
 import 'package:flutter_catelog/screens/home_screen.dart';
 import 'package:flutter_catelog/screens/login_screen.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget{
         "/" : (context) => HomePage(),
         MyRoutes.homeRoute : (context) => HomePage(),
         MyRoutes.loginRoute : (context) => LoginPage(),
+        MyRoutes.cart : (context) => Cart()
         // MyRoutes.detailRoute : (context) => HomeDetailPage()
       } // initial route, onUnknownRoute, onGenerateRoute, onGenerateInitialRoute
     );
