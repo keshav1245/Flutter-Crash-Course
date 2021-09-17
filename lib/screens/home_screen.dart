@@ -123,17 +123,19 @@ class _HomePageState extends State<HomePage> {
   //  Now we will use velocity x for UI UX designing.
 
     return Scaffold(
-      // appBar: AppBar(),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      // ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           Navigator.pushNamed(context, MyRoutes.cart);
         },
         child: Icon(CupertinoIcons.cart , color: Colors.white ,) ,
-        backgroundColor: MyTheme.darkBluish,
+        backgroundColor: Theme.of(context).buttonColor,
         tooltip: "Add to Cart",
       ),
-      backgroundColor: MyTheme.cream,
+      backgroundColor: Theme.of(context).canvasColor, // If using velocity, use context.cardColor;
       body: SafeArea(
         child: Container(
           padding: Vx.m32,

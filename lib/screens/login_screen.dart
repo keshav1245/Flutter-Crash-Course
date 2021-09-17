@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return Material(
       //child and children
-      color: Colors.white,
+      color: Theme.of(context).canvasColor,
       child: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -94,11 +94,10 @@ class _LoginPageState extends State<LoginPage> {
                       height: 40,
                     ),
                     Material(
-                      color: Colors.deepOrange,
+                      color: Theme.of(context).buttonColor,
                       borderRadius: BorderRadius.circular( changeButton ? 40 : 8),
                       child: InkWell( // Excepts its ancestor to be a material !
                         onTap: () => moveToHome(context),
-                        splashColor: Colors.deepOrangeAccent,
                         child: AnimatedContainer( // To make a Container box clickable we have 2 opts
                                    // 1. To wrap with Gesture detector : It wont give back any feedback(no ripple effect)
                                    // 2. To wrap with Inkwell : It will give feedback of clicking like ripple effect

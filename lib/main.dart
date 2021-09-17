@@ -36,11 +36,11 @@ class MyApp extends StatelessWidget{
 
     return MaterialApp(
       // home: HomePage(), // commented because given in routes
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       theme: MyTheme.lightTheme(context),
-      darkTheme: MyTheme.lightTheme(context),
+      darkTheme: MyTheme.darkTheme(context),
       debugShowCheckedModeBanner: false,
-      initialRoute: "/",
+      initialRoute: "/login",
       routes: {
         "/" : (context) => HomePage(),
         MyRoutes.homeRoute : (context) => HomePage(),

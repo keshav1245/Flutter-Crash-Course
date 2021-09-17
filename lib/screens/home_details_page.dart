@@ -18,7 +18,7 @@ class HomeDetailPage extends StatelessWidget{
       appBar: AppBar(
         backgroundColor: Colors.transparent,
       ),
-      backgroundColor: MyTheme.cream,
+      backgroundColor: Theme.of(context).canvasColor,
       body: SafeArea(
         bottom: false,
         child: Column(
@@ -32,11 +32,11 @@ class HomeDetailPage extends StatelessWidget{
               edge: VxEdge.TOP,
               arcType: VxArcType.CONVEY,
               child: Container(
-                color: Colors.white,
+                color: Theme.of(context).cardColor,
                 width: context.screenWidth,
                 child: Column(
                   children: [
-                    catalog.name.text.xl4.color(MyTheme.darkBluish).bold.make(),
+                    catalog.name.text.xl4.color(Theme.of(context).accentColor).bold.make(),
                     catalog.desc.text.xl.make(),
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor"
                         .text
@@ -48,30 +48,33 @@ class HomeDetailPage extends StatelessWidget{
           ],
         ),
       ),
-      bottomNavigationBar: ButtonBar(
-        alignment: MainAxisAlignment.spaceBetween,
-        children: [
-          "\$${catalog.price}".text.xl4.bold.red800.make(),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0,0,8.0,0),
-            child: ElevatedButton(
+      bottomNavigationBar: Container(
+        color: Theme.of(context).cardColor,
+        child: ButtonBar(
+          alignment: MainAxisAlignment.spaceBetween,
+          children: [
+            "\$${catalog.price}".text.xl4.bold.red800.make(),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0,0,8.0,0),
+              child: ElevatedButton(
 
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(MyTheme.darkBluish),
-                    shape: MaterialStateProperty.all(StadiumBorder())
-                ),
-                onPressed: (){},
-                child: Row(
-                  children: [
-                    "Add to Cart".text.make(),
-                    10.widthBox,
-                    Icon(CupertinoIcons.cart_badge_plus)
-                  ],
-                )
-            ).wh(150,50),
-          )
-        ],
-      ).p32(),
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Theme.of(context).buttonColor),
+                      shape: MaterialStateProperty.all(StadiumBorder())
+                  ),
+                  onPressed: (){},
+                  child: Row(
+                    children: [
+                      "Add to Cart".text.make(),
+                      10.widthBox,
+                      Icon(CupertinoIcons.cart_badge_plus)
+                    ],
+                  )
+              ).wh(150,50),
+            )
+          ],
+        ).p32(),
+      ),
     );
   }
 
