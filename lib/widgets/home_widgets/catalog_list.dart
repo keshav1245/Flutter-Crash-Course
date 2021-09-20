@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_catelog/models/cart.dart';
 import 'package:flutter_catelog/models/catelog.dart';
 import 'package:flutter_catelog/screens/home_details_page.dart';
 import 'package:flutter_catelog/widgets/themes.dart';
@@ -55,14 +56,7 @@ class CatalogItem extends StatelessWidget{
                       "\$${catalog.price}".text.xl.bold.make(),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0,0,8.0,0),
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(Theme.of(context).buttonColor),
-                                shape: MaterialStateProperty.all(StadiumBorder())
-                            ),
-                            onPressed: (){},
-                            child: Icon(CupertinoIcons.cart_badge_plus)
-                        ),
+                        child: _AddToCart(catalog : catalog),
                       )
                     ],
                   )
@@ -74,4 +68,43 @@ class CatalogItem extends StatelessWidget{
     ).color(Theme.of(context).cardColor).rounded.square(150).make().py16();
   }
 
+}
+
+class _AddToCart extends StatefulWidget{
+
+  final Item catalog;
+
+
+  const _AddToCart({ Key? key, required this.catalog}) : super(key: key) ;
+
+  @override
+  __AddToCartState createState() => __AddToCartState();
+}
+
+class __AddToCartState extends State<_AddToCart> {
+
+
+
+  bool isAdded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Theme.of(context).buttonColor),
+            shape: MaterialStateProperty.all(StadiumBorder())
+        ),
+        onPressed: (){
+          isAdded = isAdded.toggle();
+          final _catalog = CatalogModel();
+          final _cart = CartModel();
+          _cart.catalog = _catalog;
+          _cart.add(widget.catalog);
+          setState(() {
+
+          });
+          },
+        child: isAdded ? Icon(Icons.done) : Icon(CupertinoIcons.cart_badge_plus)
+    );
+  }
 }
